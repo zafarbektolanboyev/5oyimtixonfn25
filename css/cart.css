@@ -215,6 +215,7 @@ span{
     width: 20px;
     background-color: transparent;
     color: black;
+    font-size: 20px;
 }
 .plus, .minus:hover{
     background-color: transparent;
