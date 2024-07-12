@@ -89,3 +89,46 @@ async function fetchData() {
 }
 
 
+
+// ///////////
+const minPriceInput = document.getElementById('minPrice');
+const maxPriceInput = document.getElementById('maxPrice');
+const filterButton = document.querySelector('.btn');
+
+filterButton.addEventListener('click', async () => {
+    const minPrice = parseFloat(minPriceInput.value);
+    const maxPrice = parseFloat(maxPriceInput.value);
+
+    // const filteredProducts = products.filter(product => {
+    //     const productPrice = parseFloat(product.price);
+    //     return productPrice >= minPrice && productPrice <= maxPrice;
+    // });
+    
+
+    try {
+        const response = await fetch('https://cars-pagination.onrender.com/products');
+        if (!response.ok) {
+            throw new Error('Network response was not ok.');
+        }
+        const products = await response.json();
+
+        const filteredProducts = products.filter(product => {
+            const productPrice = parseFloat(product.price);
+            return productPrice >= minPrice && productPrice <= maxPrice;
+        });
+
+        console.log(filteredProducts);
+
+        const productList = document.getElementById('product-list');
+        productList.innerHTML = ''; // Oldingi mahsulotlarni tozalash
+
+        filteredProducts.forEach(product => {
+            const item = document.createElement('div'); // Yangi div yaratish
+            item.textContent = `${product.name} - ${product.price}`;
+            productList.innerHTML += item;
+        });
+        console.log(products.maxPrice)
+    } catch (error) {
+        console.error('Error fetching or filtering products:', error);
+    }
+});
