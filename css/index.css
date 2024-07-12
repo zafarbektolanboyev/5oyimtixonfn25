@@ -28,6 +28,8 @@ body{
 
 /*  */
 .header__container{
+    z-index: -1;
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

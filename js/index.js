@@ -1,5 +1,5 @@
 const productList = document.getElementById('product-list');
-const cardsWrapper = document.getElementById('cards-wrapper')
+const cardsWrapper = document.getElementById('cards-wrapper');
 
 function createCard(product) {
     return `

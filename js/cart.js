@@ -81,6 +81,3 @@ function renderCards() {
 document.addEventListener('DOMContentLoaded', () => {
   renderCards();
 });
-
-
-
