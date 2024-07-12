@@ -37,49 +37,100 @@ function createCard(cart) {
   }
 }
 
+// function renderCards() {
+//   const cardContainer = document.getElementById('cardContainer');
+//   const getLocal = localStorage.getItem('cart'); 
+//   let data = getLocal ? JSON.parse(getLocal) : [];
+//   data.forEach(cart => {
+//     const cardHTML = createCard(cart);
+//     cardContainer.innerHTML += cardHTML;
+//   });
+// }
+// renderCards();
+
+// const cardContainer = document.getElementById('cardContainer')
+// const delBtnAll = document.getElementById('delBtnAll');
+// delBtnAll.addEventListener('click', function(){
+//     cardContainer.innerHTML = '';
+//     let data = localStorage.getItem(JSON.parse(cart));
+//     data = '';
+//     localStorage.setItem('cart', JSON.stringify(data));
+//     data = data.filter(heroCard => heroCard.id !== heroCard);
+//     setLocalData(data);
+// })
+
+// const deleteButton = document.querySelector('.delete-button');
+// const heroCard = document.querySelector('hero-card')
+// deleteButton.addEventListener('click', function(){
+//   cardContainer.remove(heroCard)
+// })
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   const valueElement = document.querySelector('.value');
+//   let value = 0;
+
+//   document.querySelector('.plus').addEventListener('click', () => {
+//     value++;
+//     valueElement.textContent = value;
+//   });
+
+//   document.querySelector('.minus').addEventListener('click', () => {
+//     value--;
+//     valueElement.textContent = value;
+//     return value = 1;
+//   });
+// });
+
+
 function renderCards() {
   const cardContainer = document.getElementById('cardContainer');
-  const getLocal = localStorage.getItem('cart'); // 'cartData' - bu sizning localStorage'dan olgan kalitingiz
+  const getLocal = localStorage.getItem('cart'); 
   let data = getLocal ? JSON.parse(getLocal) : [];
-
+  cardContainer.innerHTML = '';
   data.forEach(cart => {
     const cardHTML = createCard(cart);
     cardContainer.innerHTML += cardHTML;
   });
+  data.forEach(cart => {
+    document.getElementById(`plus-${cart.id}`).addEventListener('click', () => {
+      cart.quantity++;
+      document.getElementById(`value-${cart.id}`).textContent = cart.quantity;
+      localStorage.setItem('cart', JSON.stringify(data));
+      renderCards();
+    });
+
+    document.getElementById(`minus-${cart.id}`).addEventListener('click', () => {
+      if (cart.quantity > 0) {
+        cart.quantity--;
+        document.getElementById(`value-${cart.id}`).textContent = cart.quantity;
+        localStorage.setItem('cart', JSON.stringify(data));
+        renderCards();
+      }
+    });
+
+    document.getElementById(`delBtn-${cart.id}`).addEventListener('click', () => {
+      data = data.filter(item => item.id !== cart.id);
+      localStorage.setItem('cart', JSON.stringify(data));
+      renderCards();
+    });
+  });
+
+  const delBtnAll = document.getElementById('delBtnAll');
+  if (delBtnAll) {
+    delBtnAll.addEventListener('click', () => {
+      localStorage.removeItem('cart');
+      renderCards();
+    });
+  }
 }
-
-renderCards();
-
-const cardContainer = document.getElementById('cardContainer')
-const delBtnAll = document.getElementById('delBtnAll');
-delBtnAll.addEventListener('click', function(){
-    cardContainer.innerHTML = '';
-    let data = localStorage.getItem(JSON.parse(cart));
-    data = '';
-    localStorage.setItem('cart', JSON.stringify(data));
-    data = data.filter(cart => cart.id !== cart);
-    setLocalData(data);
-})
-
-const deleteButton = document.querySelector('.delete-button');
-const heroCard = document.querySelector('hero-card')
-deleteButton.addEventListener('click', function(){
-  cardContainer.remove(heroCard)
-})
-
-
 document.addEventListener('DOMContentLoaded', () => {
-  const valueElement = document.querySelector('.value');
-  let value = 0;
-
-  document.querySelector('.plus').addEventListener('click', () => {
-    value++;
-    valueElement.textContent = value;
-  });
-
-  document.querySelector('.minus').addEventListener('click', () => {
-    value--;
-    valueElement.textContent = value;
-    return value = 1;
-  });
+  if (!localStorage.getItem('cart')) {
+    const mockData = [
+      { id: 1, name: 'Product 1', image: 'path/to/image1.jpg', price: 100, newPrice: 100, quantity: 0 },
+      { id: 2, name: 'Product 2', image: 'path/to/image2.jpg', price: 150, newPrice: 150, quantity: 0 },
+      { id: 3, name: 'Product 3', image: 'path/to/image3.jpg', price: 200, newPrice: 200, quantity: 0 },
+    ];
+    localStorage.setItem('cart', JSON.stringify(mockData));
+  }
+  renderCards();
 });
