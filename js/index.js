@@ -53,4 +53,39 @@ document.addEventListener('DOMContentLoaded', function(){
             })
         })
 })
-// ////////
+//
+async function fetchData() {
+    const selectElement = document.getElementById('pupolyarnost');
+    const selectedValue = selectElement.value;
+
+    try {
+        const response = await fetch('https://cars-pagination.onrender.com/products');
+        if (!response.ok) {
+            throw new Error('Network response was not ok.');
+        }
+        const products = await response.json();
+
+        const filteredProducts = products.filter(product => product.category === selectedValue);
+
+
+        console.log(filteredProducts); 
+
+        const productList = document.getElementById('product-list');
+        productList.innerHTML = '';
+        filteredProducts.forEach(product => {
+            const item = document.createElement('div');
+            item.textContent = `${product.name} - ${product.price}`;
+            productList.innerHTML += createCard(product);
+        });
+
+        if (selectedValue === 'не популярен') {
+            productList = products;
+        } else {
+            filteredProducts = products.filter(product => product.category === selectedValue);
+        }
+    } catch (error) {
+        console.error('Error fetching products:', error);
+    }
+}
+
+
