@@ -124,13 +124,8 @@ function renderCards() {
   }
 }
 document.addEventListener('DOMContentLoaded', () => {
-  if (!localStorage.getItem('cart')) {
-    const mockData = [
-      { id: 1, name: 'Product 1', image: 'path/to/image1.jpg', price: 100, newPrice: 100, quantity: 0 },
-      { id: 2, name: 'Product 2', image: 'path/to/image2.jpg', price: 150, newPrice: 150, quantity: 0 },
-      { id: 3, name: 'Product 3', image: 'path/to/image3.jpg', price: 200, newPrice: 200, quantity: 0 },
-    ];
-    localStorage.setItem('cart', JSON.stringify(mockData));
-  }
   renderCards();
 });
+
+
+

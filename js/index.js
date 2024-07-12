@@ -53,3 +53,39 @@ document.addEventListener('DOMContentLoaded', function(){
             })
         })
 })
+// ////////
+function fetchData() {
+    const dropdown = document.getElementById('dropdown');
+    const selectedValue = dropdown.value;
+  
+    let apiUrl = '';
+  
+    if (selectedValue === 'popularity') {
+      apiUrl = 'YOUR_API_ENDPOINT_FOR_POPULARITY';
+    } else if (selectedValue === 'not_popular') {
+      apiUrl = 'YOUR_API_ENDPOINT_FOR_NOT_POPULAR';
+    }
+  
+    if (apiUrl) {
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          displayData(data);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }
+  }
+  
+  function displayData(data) {
+    const resultDiv1 = document.getElementById('product-list');
+    const resultDiv2 = document.getElementById('cards-wrapper');
+    resultDiv1.innerHTML = '';
+    resultDiv2.innerHTML = '';
+  
+    data.forEach(item => {
+      resultDiv1.innerHTML += createCard(item);
+      resultDiv2.innerHTML += createCard(item);
+    });
+  }
