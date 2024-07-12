@@ -30,7 +30,7 @@ function createCard(product) {
 function handleCardClick(productId) {
     window.location.href = `/pages/single.html?id=${productId}`;
 }
-
+// 12ta elementni ekranga chiqaryapti
 document.addEventListener('DOMContentLoaded', function() {
     fetch('https://cars-pagination.onrender.com/products')
         .then(res => res.json())
@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 });
+// bu 4ta
 document.addEventListener('DOMContentLoaded', function(){
     fetch('https://cars-pagination.onrender.com/products')
         .then(res => res.json())
@@ -53,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function(){
             })
         })
 })
-//
+// Kategoriya boyicha filter qilyapti
 async function fetchData() {
     const selectElement = document.getElementById('pupolyarnost');
     const selectedValue = selectElement.value;
@@ -90,7 +91,7 @@ async function fetchData() {
 
 
 
-// ///////////
+// Narxi boyicha 
 const minPriceInput = document.getElementById('minPrice');
 const maxPriceInput = document.getElementById('maxPrice');
 const filterButton = document.querySelector('.btn');
@@ -98,13 +99,6 @@ const filterButton = document.querySelector('.btn');
 filterButton.addEventListener('click', async () => {
     const minPrice = parseFloat(minPriceInput.value);
     const maxPrice = parseFloat(maxPriceInput.value);
-
-    // const filteredProducts = products.filter(product => {
-    //     const productPrice = parseFloat(product.price);
-    //     return productPrice >= minPrice && productPrice <= maxPrice;
-    // });
-    
-
     try {
         const response = await fetch('https://cars-pagination.onrender.com/products');
         if (!response.ok) {
@@ -120,10 +114,10 @@ filterButton.addEventListener('click', async () => {
         console.log(filteredProducts);
 
         const productList = document.getElementById('product-list');
-        productList.innerHTML = ''; // Oldingi mahsulotlarni tozalash
+        productList.innerHTML = '';
 
         filteredProducts.forEach(product => {
-            const item = document.createElement('div'); // Yangi div yaratish
+            const item = document.createElement('div');
             item.textContent = `${product.name} - ${product.price}`;
             productList.innerHTML += item;
         });

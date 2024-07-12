@@ -37,51 +37,6 @@ function createCard(cart) {
   }
 }
 
-// function renderCards() {
-//   const cardContainer = document.getElementById('cardContainer');
-//   const getLocal = localStorage.getItem('cart'); 
-//   let data = getLocal ? JSON.parse(getLocal) : [];
-//   data.forEach(cart => {
-//     const cardHTML = createCard(cart);
-//     cardContainer.innerHTML += cardHTML;
-//   });
-// }
-// renderCards();
-
-// const cardContainer = document.getElementById('cardContainer')
-// const delBtnAll = document.getElementById('delBtnAll');
-// delBtnAll.addEventListener('click', function(){
-//     cardContainer.innerHTML = '';
-//     let data = localStorage.getItem(JSON.parse(cart));
-//     data = '';
-//     localStorage.setItem('cart', JSON.stringify(data));
-//     data = data.filter(heroCard => heroCard.id !== heroCard);
-//     setLocalData(data);
-// })
-
-// const deleteButton = document.querySelector('.delete-button');
-// const heroCard = document.querySelector('hero-card')
-// deleteButton.addEventListener('click', function(){
-//   cardContainer.remove(heroCard)
-// })
-
-// document.addEventListener('DOMContentLoaded', () => {
-//   const valueElement = document.querySelector('.value');
-//   let value = 0;
-
-//   document.querySelector('.plus').addEventListener('click', () => {
-//     value++;
-//     valueElement.textContent = value;
-//   });
-
-//   document.querySelector('.minus').addEventListener('click', () => {
-//     value--;
-//     valueElement.textContent = value;
-//     return value = 1;
-//   });
-// });
-
-
 function renderCards() {
   const cardContainer = document.getElementById('cardContainer');
   const getLocal = localStorage.getItem('cart'); 
