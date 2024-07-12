@@ -54,27 +54,3 @@ document.addEventListener('DOMContentLoaded', function(){
         })
 })
 // ////////
-document.getElementById('category').addEventListener('change', fetchProducts);
-
-async function fetchProducts() {
-  const category = document.getElementById('category').value;
-  const url = `https://cars-pagination.onrender.com/products?category=${category}`;
-  
-  try {
-    const response = await fetch(url);
-    const products = await response.json();
-    
-    // Clear previous products
-    const productsList = document.getElementById('products');
-    productsList.innerHTML = '';
-    
-    // Append new products
-    products.forEach(product => {
-      card.textContent = `${product.name} - ${product.price}`;
-      productsList.appendChild(card);
-    });
-  } catch (error) {
-    console.error('Error fetching products:', error);
-  }
-}
-const card = document.getElementById('card')
